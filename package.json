@@ -1,0 +1,38 @@
+{
+  "name": "@productclank/communiply-cli",
+  "version": "0.1.0",
+  "description": "Boost your tweets with community-powered engagement",
+  "type": "module",
+  "bin": {
+    "communiply": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "twitter",
+    "boost",
+    "community",
+    "growth",
+    "productclank"
+  ],
+  "author": "ProductClank",
+  "license": "Proprietary",
+  "dependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
