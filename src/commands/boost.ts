@@ -23,6 +23,8 @@ export function boostCommand(): Command {
     )
     .option("-p, --product <id>", "Product ID (or use default from config)")
     .option("-g, --guidelines <text>", "Custom reply guidelines")
+    .option("-t, --tweet-text <text>", "Tweet text (skips server-side fetch — useful when Twitter API is down)")
+    .option("--tweet-author <username>", "Tweet author username (used with --tweet-text)")
     .option("--json", "Output raw JSON")
     .option("-y, --yes", "Skip confirmation prompt")
     .action(async (tweetUrl: string, opts) => {
@@ -126,6 +128,8 @@ export function boostCommand(): Command {
         action_type: actionType === "reposts" ? "repost" : actionType,
       };
       if (opts.guidelines) body.reply_guidelines = opts.guidelines;
+      if (opts.tweetText) body.tweet_text = opts.tweetText;
+      if (opts.tweetAuthor) body.tweet_author = opts.tweetAuthor;
 
       const res = await api<Record<string, unknown>>("/campaigns/boost", {
         method: "POST",

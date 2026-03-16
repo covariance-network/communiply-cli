@@ -1,6 +1,6 @@
 # Communiply CLI
 
-Boost your tweets with community-powered engagement. Part of [ProductClank](https://productclank.com).
+Rally your community to engage with your tweets — replies, likes, and reposts powered by [ProductClank](https://productclank.com).
 
 ## Install
 
@@ -11,7 +11,7 @@ npm install -g @productclank/communiply-cli
 ## Quick Start
 
 ```bash
-# 1. Register (first time only)
+# 1. Register (first time only — get 300 free credits)
 communiply auth register MyAgent
 
 # 2. Or login with existing key
@@ -20,43 +20,61 @@ communiply auth login pck_live_YOUR_KEY
 # 3. Link your ProductClank account (optional, uses your credits)
 communiply auth link
 
-# 4. Boost a tweet
-communiply boost https://x.com/yourhandle/status/123456789
+# 4. Boost a tweet — get community replies
+communiply boost https://x.com/myproduct/status/123456789
 ```
 
 ## Commands
 
 ### `communiply boost <tweet-url>`
 
-Boost a tweet with community engagement.
+Get your community to engage with your tweet — replies (support, questions, congrats), likes, or reposts.
 
 ```bash
-# Default: 10 AI-generated replies (200 credits)
-communiply boost https://x.com/user/status/123
+# Community replies showing support and asking questions (200 credits)
+communiply boost https://x.com/myproduct/status/123 --action replies \
+  --guidelines "Congratulate the team, ask about the new features, show excitement"
 
-# Get likes instead (300 credits)
-communiply boost https://x.com/user/status/123 --action likes
+# Community likes (300 credits)
+communiply boost https://x.com/myproduct/status/123 --action likes
 
-# Get reposts (300 credits)
-communiply boost https://x.com/user/status/123 --action reposts
+# Community reposts (300 credits)
+communiply boost https://x.com/myproduct/status/123 --action reposts
 
-# With custom reply guidelines
-communiply boost https://x.com/user/status/123 --guidelines "Focus on the technical innovation"
+# Pass tweet text directly (skips server-side fetch — useful when Twitter API is down)
+communiply boost https://x.com/myproduct/status/123 --action replies \
+  --tweet-text "We just shipped v2.0! 10x faster API." \
+  --tweet-author myproduct
+
+# Skip confirmation prompt (for scripting/automation)
+communiply boost https://x.com/myproduct/status/123 --yes
 
 # Skip product prompt if you have a default set
-communiply boost https://x.com/user/status/123 --product YOUR_PRODUCT_ID
+communiply boost https://x.com/myproduct/status/123 --product YOUR_PRODUCT_ID
 ```
 
 | Action | What You Get | Credits |
 |--------|-------------|---------|
-| Replies (default) | 10 AI-generated reply threads | 200 |
+| Replies (default) | 10 community replies (support, questions, congrats) | 200 |
 | Likes | 30 community likes | 300 |
 | Reposts | 10 community reposts | 300 |
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--action <type>` | `-a` | Action type: replies, likes, or reposts (default: replies) |
+| `--product <id>` | `-p` | Product ID (or use default from config) |
+| `--guidelines <text>` | `-g` | Custom reply guidelines (e.g., "ask about features, show excitement") |
+| `--tweet-text <text>` | `-t` | Tweet text — skips server-side fetch |
+| `--tweet-author <name>` | | Tweet author username (used with --tweet-text) |
+| `--json` | | Output raw JSON (for scripting) |
+| `--yes` | `-y` | Skip confirmation prompt |
 
 ### `communiply auth`
 
 ```bash
-communiply auth register MyAgent   # Create new agent + get API key
+communiply auth register MyAgent   # Create new agent + get API key + 300 free credits
 communiply auth login [key]        # Save API key
 communiply auth status             # Check auth + credits
 communiply auth link               # Link to ProductClank account
@@ -90,23 +108,23 @@ Config is stored at `~/.communiply/config.json`:
 
 You can also set `COMMUNIPLY_API_KEY` as an environment variable.
 
-## Flags
-
-All commands support:
-- `--json` — Output raw JSON (for scripting)
-- `--help` — Show help
-
 ## What happens after a boost?
 
 1. Your tweet gets queued for community engagement
 2. Community members see the opportunity in their dashboard
-3. They claim tasks, post from their personal accounts
-4. You get authentic, third-party engagement
+3. They claim tasks and post from their personal accounts
+4. You get authentic, third-party engagement (support, questions, congrats)
 5. Track results at `app.productclank.com/communiply/`
 
 ## Credits
 
-New agents get **300 free credits**. Top up via the [ProductClank webapp](https://app.productclank.com) or USDC on Base.
+New agents get **300 free credits**. Top up via the [ProductClank webapp](https://app.productclank.com/credits) or USDC on Base.
+
+## Related
+
+- [Agent Skill](https://github.com/covariance-network/productclank-agent-skill) — For AI agents to autonomously create campaigns
+- [API Reference](https://github.com/covariance-network/productclank-agent-skill/blob/main/references/API_REFERENCE.md) — Complete API docs
+- [ProductClank](https://productclank.com) — Platform
 
 ## License
 
