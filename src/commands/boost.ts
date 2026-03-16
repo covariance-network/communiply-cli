@@ -24,6 +24,7 @@ export function boostCommand(): Command {
     .option("-p, --product <id>", "Product ID (or use default from config)")
     .option("-g, --guidelines <text>", "Custom reply guidelines")
     .option("--json", "Output raw JSON")
+    .option("-y, --yes", "Skip confirmation prompt")
     .action(async (tweetUrl: string, opts) => {
       const apiKey = requireApiKey();
 
@@ -108,10 +109,12 @@ export function boostCommand(): Command {
       out.label("Cost", `${cost.credits} credits`);
       console.log();
 
-      const proceed = await confirm({ message: "Proceed?", default: true });
-      if (!proceed) {
-        out.info("Cancelled.");
-        return;
+      if (!opts.yes) {
+        const proceed = await confirm({ message: "Proceed?", default: true });
+        if (!proceed) {
+          out.info("Cancelled.");
+          return;
+        }
       }
 
       // Execute boost
