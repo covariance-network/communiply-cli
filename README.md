@@ -1,6 +1,6 @@
 # Communiply CLI
 
-Rally your community to engage with your tweets — replies, likes, and reposts powered by [ProductClank](https://productclank.com).
+Rally your community to engage with your posts — replies, likes, and reposts powered by [ProductClank](https://productclank.com).
 
 ## Install
 
@@ -20,31 +20,70 @@ communiply auth login pck_live_YOUR_KEY
 # 3. Link your ProductClank account (optional, uses your credits)
 communiply auth link
 
-# 4. Boost a tweet — get community replies
+# 4. Boost a post — get community replies
 communiply boost https://x.com/myproduct/status/123456789
+communiply boost https://www.instagram.com/p/ABC123/
+communiply boost https://www.tiktok.com/@user/video/123456789
+communiply boost https://www.linkedin.com/posts/user_activity-123
+communiply boost https://www.reddit.com/r/subreddit/comments/abc123/title/
+communiply boost https://warpcast.com/user/0xabc123
 ```
+
+## Supported Platforms
+
+| Platform | Replies | Likes | Reposts |
+|----------|---------|-------|---------|
+| Twitter/X | Yes | Yes | Yes |
+| Instagram | Yes | Yes | — |
+| TikTok | Yes | Yes | — |
+| LinkedIn | Yes | Yes | — |
+| Reddit | Yes | Yes | — |
+| Farcaster | Yes | Yes | Yes |
 
 ## Commands
 
-### `communiply boost <tweet-url>`
+### `communiply boost <post-url>`
 
-Get your community to engage with your tweet — replies (support, questions, congrats), likes, or reposts.
+Get your community to engage with your post — replies (support, questions, congrats), likes, or reposts.
+
+The platform is auto-detected from the URL. All major social platforms are supported.
 
 ```bash
-# Community replies showing support and asking questions (200 credits)
+# Twitter/X — community replies (200 credits)
 communiply boost https://x.com/myproduct/status/123 --action replies \
   --guidelines "Congratulate the team, ask about the new features, show excitement"
+
+# Instagram — community replies
+communiply boost https://www.instagram.com/p/ABC123/ --action replies \
+  --guidelines "Love the visual, ask about the product"
+
+# TikTok — community replies
+communiply boost https://www.tiktok.com/@user/video/123456789 --action replies
+
+# LinkedIn — community replies
+communiply boost https://www.linkedin.com/posts/user_activity-123 --action replies \
+  --guidelines "Professional tone, ask about the announcement"
+
+# Reddit — community replies
+communiply boost https://www.reddit.com/r/subreddit/comments/abc123/title/ --action replies
+
+# Farcaster — community replies
+communiply boost https://warpcast.com/user/0xabc123 --action replies
 
 # Community likes (300 credits)
 communiply boost https://x.com/myproduct/status/123 --action likes
 
-# Community reposts (300 credits)
+# Community reposts (300 credits — Twitter/X and Farcaster only)
 communiply boost https://x.com/myproduct/status/123 --action reposts
 
-# Pass tweet text directly (skips server-side fetch — useful when Twitter API is down)
+# Pass post text directly (skips server-side fetch)
 communiply boost https://x.com/myproduct/status/123 --action replies \
-  --tweet-text "We just shipped v2.0! 10x faster API." \
-  --tweet-author myproduct
+  --post-text "We just shipped v2.0! 10x faster API." \
+  --post-author myproduct
+
+# Legacy Twitter flags still work
+communiply boost https://x.com/myproduct/status/123 \
+  --tweet-text "We just shipped v2.0!" --tweet-author myproduct
 
 # Skip confirmation prompt (for scripting/automation)
 communiply boost https://x.com/myproduct/status/123 --yes
@@ -66,8 +105,10 @@ communiply boost https://x.com/myproduct/status/123 --product YOUR_PRODUCT_ID
 | `--action <type>` | `-a` | Action type: replies, likes, or reposts (default: replies) |
 | `--product <id>` | `-p` | Product ID (or use default from config) |
 | `--guidelines <text>` | `-g` | Custom reply guidelines (e.g., "ask about features, show excitement") |
-| `--tweet-text <text>` | `-t` | Tweet text — skips server-side fetch |
-| `--tweet-author <name>` | | Tweet author username (used with --tweet-text) |
+| `--post-text <text>` | `-t` | Post text — skips server-side fetch |
+| `--post-author <name>` | | Post author username (used with --post-text) |
+| `--tweet-text <text>` | | Legacy alias for --post-text (still works) |
+| `--tweet-author <name>` | | Legacy alias for --post-author (still works) |
 | `--json` | | Output raw JSON (for scripting) |
 | `--yes` | `-y` | Skip confirmation prompt |
 
@@ -110,7 +151,7 @@ You can also set `COMMUNIPLY_API_KEY` as an environment variable.
 
 ## What happens after a boost?
 
-1. Your tweet gets queued for community engagement
+1. Your post gets queued for community engagement
 2. Community members see the opportunity in their dashboard
 3. They claim tasks and post from their personal accounts
 4. You get authentic, third-party engagement (support, questions, congrats)
