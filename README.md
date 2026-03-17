@@ -5,7 +5,7 @@ Rally your community to engage with your posts — replies, likes, and reposts p
 ## Install
 
 ```bash
-npm install -g @productclank/communiply-cli
+npm install -g github:covariance-network/communiply-cli
 ```
 
 ## Quick Start
