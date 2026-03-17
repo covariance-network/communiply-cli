@@ -1,7 +1,7 @@
 {
   "name": "@productclank/communiply-cli",
-  "version": "0.1.0",
-  "description": "Boost your tweets with community-powered engagement",
+  "version": "0.2.0",
+  "description": "Boost your posts with community-powered engagement across Twitter/X, Instagram, TikTok, LinkedIn, Reddit, and Farcaster",
   "type": "module",
   "bin": {
     "communiply": "./dist/cli.js"
@@ -14,6 +14,11 @@
   },
   "keywords": [
     "twitter",
+    "instagram",
+    "tiktok",
+    "linkedin",
+    "reddit",
+    "farcaster",
     "boost",
     "community",
     "growth",
