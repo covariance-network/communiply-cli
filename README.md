@@ -11,7 +11,7 @@ npm install -g github:covariance-network/communiply-cli
 ## Quick Start
 
 ```bash
-# 1. Register (first time only — get 300 free credits)
+# 1. Register (first time only)
 communiply auth register MyAgent
 
 # 2. Or login with existing key
@@ -115,7 +115,7 @@ communiply boost https://x.com/myproduct/status/123 --product YOUR_PRODUCT_ID
 ### `communiply auth`
 
 ```bash
-communiply auth register MyAgent   # Create new agent + get API key + 300 free credits
+communiply auth register MyAgent   # Create new agent + get API key
 communiply auth login [key]        # Save API key
 communiply auth status             # Check auth + credits
 communiply auth link               # Link to ProductClank account
@@ -159,7 +159,7 @@ You can also set `COMMUNIPLY_API_KEY` as an environment variable.
 
 ## Credits
 
-New agents get **300 free credits**. Top up via the [ProductClank webapp](https://app.productclank.com/credits) or USDC on Base.
+Top up credits via the [ProductClank webapp](https://app.productclank.com/credits/purchase) (credit card or crypto) or USDC on Base via x402 (`POST /api/v1/agents/credits/topup`).
 
 ## Related
 
